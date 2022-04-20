@@ -2,7 +2,7 @@
   "name": "MiniHack Level Editor",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://minihack-editor.github.io/react-gh-pages",
+  "homepage": "https://minihack-editor.github.io",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
