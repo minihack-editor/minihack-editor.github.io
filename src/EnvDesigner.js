@@ -147,12 +147,9 @@ class EnvDesigner extends Component {
 
   componentDidMount() {
 
-    const canvasWidth = this.mount.parentNode.offsetWidth;
-    const canvasHeight = (this.props.gridHeight*canvasWidth)/this.props.gridWidth;
-
-    this.renderer.setSize(canvasWidth, canvasHeight);
-
     this.mount.appendChild(this.renderer.domElement);
+
+    this.resizeCanvas(this.props.gridWidth, this.props.gridHeight);
 
     this.mouseX = 0;
     this.mouseY = 0;
