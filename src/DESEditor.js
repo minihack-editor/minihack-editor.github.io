@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class DESEditor extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class DESEditor extends Component {
           </span>
           <span style={{float:"right"}}>
             <Button variant="danger" onClick={this.props.clearState}>
-              Clear Editor <FontAwesomeIcon size="xs" icon={faCopy} />
+              Clear Editor <FontAwesomeIcon size="xs" icon={faTrash} />
             </Button>
           </span>
         </div>
