@@ -36,38 +36,40 @@ class EditorStateHandler {
     // Draw vertical walls
     [0, width - 1].forEach((x) => {
       for (let y = 0; y < height; y++) {
-        this.addTile(widthOffset+x, heightOffset+y, wallTile);
+        this.addTile(widthOffset + x, heightOffset + y, wallTile);
       }
     });
 
     // Draw horizontal walls
     [0, height - 1].forEach((y) => {
       for (let x = 0; x < width; x++) {
-        this.addTile(widthOffset+x, heightOffset+y, wallTile);
+        this.addTile(widthOffset + x, heightOffset + y, wallTile);
       }
     });
 
     // Fill in floor
-    for (let y = 1; y < height-1; y++) {
-      for (let x = 1; x < width-1; x++) {
-        this.addTile(widthOffset+x, heightOffset+y, floorTile);
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        this.addTile(widthOffset + x, heightOffset + y, floorTile);
       }
     }
 
     // Place human in middle left
-    this.addTile(widthOffset+1, heightOffset+height/2, humanTile);
+    this.addTile(widthOffset + 1, heightOffset + height / 2, humanTile);
 
     // Place stairs in top right
-    this.addTile(widthOffset+width-2, heightOffset+height-2, stairsTile);
+    this.addTile(
+      widthOffset + width - 2,
+      heightOffset + height - 2,
+      stairsTile
+    );
 
     // Monster bottom right
-    this.addTile(widthOffset+width-2, heightOffset+1, monsterTile);
-
-
+    this.addTile(widthOffset + width - 2, heightOffset + 1, monsterTile);
   }
 
   getState = () => {
-    return { ...this.editorHistory[this.editorHistory.length-1] };
+    return { ...this.editorHistory[this.editorHistory.length - 1] };
   };
 
   pushState = (state) => {
@@ -89,6 +91,8 @@ class EditorStateHandler {
       state.tileTypeCount[category] = 0;
     }
 
+    const location = locationKey(x, y);
+
     if (
       tileData.maxInstances != -1 &&
       state.tileTypeCount[category] + 1 > tileData.maxInstances
@@ -96,7 +100,11 @@ class EditorStateHandler {
       return false;
     }
 
-    state.tiles[locationKey(x, y)] = { ...tileData, x, y };
+    if (state.tiles[location]) {
+      this.removeTile(x, y);
+    }
+
+    state.tiles[location] = { ...tileData, x, y };
 
     state.tileTypeCount[category]++;
 
@@ -121,7 +129,7 @@ class EditorStateHandler {
     };
 
     this.pushState(clearedState);
-  }
+  };
 }
 
 export default EditorStateHandler;
