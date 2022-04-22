@@ -7,6 +7,7 @@ import EnvDesigner from "./EnvDesigner";
 import TileSelection from "./TileSelection";
 import NethackTileset from "./tilesets/nethack/NethackTileset_loophack";
 import PlusMinusButton from "./PlusMinusButton";
+import EditorStateHandler from "./EditorStateHandler";
 
 class App extends Component {
   constructor() {
@@ -28,7 +29,9 @@ class App extends Component {
       gridHeight: defaultGridHeight,
     };
 
+    
     this.nethackTileset = new NethackTileset();
+    this.editorStateHandler = new EditorStateHandler(this.nethackTileset);
   }
 
   onTileSelect = (tileInfo) => {
@@ -76,6 +79,16 @@ class App extends Component {
     });
   };
 
+  clearState = () => {
+    const desString = `
+    DES will appear here when you add tiles...
+    `;
+
+    this.editorStateHandler.clearState();
+
+    this.onCompile(desString);
+  }
+
   render() {
     return (
       <Container fluid className="ep-container">
@@ -122,6 +135,7 @@ class App extends Component {
             <Row className="ep-ide-map-builder">
               <Col md={11} className="ep-ide-editor">
                 <EnvDesigner
+                  editorStateHandler={this.editorStateHandler}
                   tileset={this.nethackTileset}
                   selectedTile={this.state.selectedTile}
                   onCompile={this.onCompile}
@@ -153,7 +167,7 @@ class App extends Component {
             </Row>
           </Col>
           <Col md={4} className="">
-            <DESEditor desString={this.state.desString} />
+            <DESEditor clearState={this.clearState} desString={this.state.desString} />
           </Col>
         </Row>
       </Container>

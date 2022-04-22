@@ -43,7 +43,7 @@ class EnvDesigner extends Component {
       tileId: false,
     };
 
-    this.editorStateHandler = new EditorStateHandler(props.tileset);
+    this.editorStateHandler = this.props.editorStateHandler;
     this.stateCompiler = new StateCompiler();
     this.renderer = new THREE.WebGLRenderer();
   }
@@ -160,6 +160,8 @@ class EnvDesigner extends Component {
     const scene = new THREE.Scene();
 
     const textureLoader = new THREE.TextureLoader();
+
+    this.recompileState();
 
     // Preload Tilesets
     this.tilesetMaterial = {};
