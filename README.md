@@ -32,3 +32,7 @@ npm run start
 ```
 
 This will start a [local server on port 3000](localhost:3000) which you can use to access the level editor
+
+
+# Licence 
+[Apache 2.0](https://github.com/apache/.github/blob/main/LICENSE)
